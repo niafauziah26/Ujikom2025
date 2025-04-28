@@ -93,12 +93,22 @@
   
   <script type="module">
     import { ambiltodolist, ubahtodolist } from './main.js';
-        // Ambil elemen form
+    
+    // Ambil elemen form
     let tombolUbah = document.getElementById('tombol-ubah');
     let elemenTugas = document.getElementById('input-tugas');
     let elemenStatus = document.getElementById('input-status');
     let elemenPrioritas = document.getElementById('input-prioritas');
     let elemenTanggal = document.getElementById('input-tanggal');
+    
+    // Ambil parameter dari URL
+    const queryString = window.location.search;
+    const parameterURL = new URLSearchParams(queryString);
+    const docId = parameterURL.get('docId');
+    const nama = parameterURL.get('nama');
+    const prioritas = parameterURL.get('prioritas');
+    const tanggal = parameterURL.get('tanggal');
+    const status = parameterURL.get('status');
   
   
 </body>
