@@ -119,6 +119,42 @@
   </thead>
   <tbody id="completedBody"></tbody>
 </table>
+
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script type="module">
+
+    import { tambahtodolist, ambildaftartodolist, hapustodolist, ubahtodolist } from './main.js';
+    
+    let editMode = false;
+    let editDocId = null;
+    
+    async function addTask() {
+  const taskInput = $('#taskInput').val();
+  const dateInput = $('#dateInput').val();
+  const priorityInput = $('#priorityInput').val();
+  
+  if (taskInput === '') {
+    alert('Masukkan tugas!');
+    return;
+  }
+  if (dateInput === '') {
+    alert('Masukkan tanggal!');
+    return;
+  }
+  if (!priorityInput) {
+    alert('Masukkan Prioritas!');
+    return;
+  }
+  
+  if (editMode) {
+    // Update existing task
+    await ubahtodolist(editDocId, taskInput, priorityInput, dateInput, false);
+  } else {
+    // Tambah tugas baru dengan status default: Belum Dikerjakan (false)
+    await tambahtodolist(taskInput, priorityInput, dateInput, false);
+  }
+  
   
 </body>
 
