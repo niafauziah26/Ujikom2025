@@ -57,3 +57,21 @@ export async function tambahtodolist(nama, prioritas, tanggal) {
     console.log('Gagal menambah todolist ' + e);
   }
 }
+
+export async function hapustodolist(docid) {
+  await deleteDoc(doc(db, "todolist", docid));
+}
+export async function ubahtodolist(docId, nama, prioritas, tanggal, status) {
+  await updateDoc(doc(db, "todolist", docId), {
+    nama: nama,
+    prioritas: prioritas,
+    tanggal: tanggal,
+    status: status
+  });
+}
+export async function ambiltodolist(docId) {
+  const docRef = doc(db, "todolist", docId);
+  const docSnap = await getDoc(docRef);
+
+  return docSnap.data();
+}
