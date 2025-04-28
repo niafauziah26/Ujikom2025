@@ -109,7 +109,20 @@
     const prioritas = parameterURL.get('prioritas');
     const tanggal = parameterURL.get('tanggal');
     const status = parameterURL.get('status');
-  
+    
+     // Isi form dengan data dari URL
+    elemenTugas.value = nama;
+    elemenStatus.value = status;
+    elemenPrioritas.value = prioritas;
+    elemenTanggal.value = tanggal;
+    
+    // Event listener untuk tombol ubah
+    tombolUbah.addEventListener('click', async function(e) {
+      e.preventDefault();
+      await ubahtodolist(docId, elemenTugas.value, elemenPrioritas.value, elemenTanggal.value, elemenStatus.value);
+      window.location.href = 'index.html';
+    });
+  </script>
   
 </body>
 
