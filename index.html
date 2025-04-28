@@ -155,6 +155,58 @@
     await tambahtodolist(taskInput, priorityInput, dateInput, false);
   }
   
+    tampilkanTodolist();
+
+  resetForm();
+
+}    
+    function editTask(button, docId) {
+  const row = $(button).closest('tr'); // Cari baris tabel terkait tombol
+  const nama = row.find('td:nth-child(1)').text(); // Ambil teks dari kolom pertama
+  const prioritas = row.find('td:nth-child(2)').text(); // Ambil teks dari kolom kedua
+  const tanggal = row.find('td:nth-child(4)').text(); // Ambil teks dari kolom keempat
+  const status = row.find('select.status').val(); // Ambil nilai dari dropdown status
+
+  if (!nama || !prioritas || !tanggal) {
+    alert('Data tugas tidak ditemukan atau tidak valid.');
+    return;
+  }
+
+  // Redirect ke halaman ubah dengan parameter
+  window.location.href = `ubah.html?docId=${docId}&nama=${nama}&prioritas=${prioritas}&tanggal=${tanggal}&status=${status}`;
+}
+    
+    async function updateStatus(select) {
+  const row = $(select).closest('tr');
+  const docId = row.data('id');
+  const status = $(select).val() === 'Selesai';
+  
+  const nama = row.find('td:nth-child(1)').text();
+  const prioritas = row.find('td:nth-child(2)').text();
+  const tanggalText = row.find('td:nth-child(4)').text();
+if (!tanggalText) {
+  alert("Tanggal tidak ditemukan pada baris ini.");
+  return;
+}
+const tanggal = tanggalText.split('/').reverse().join('-');
+  
+  try {
+    await ubahtodolist(docId, nama, prioritas, tanggal, status);
+    tampilkanTodolist(); // Refresh tampilan
+  } catch (error) {
+    console.error('Error updating status:', error);
+    alert('Gagal memperbarui status. Pastikan ID dokumen benar dan ada di database.');
+  }
+}
+    
+    function resetForm() {
+      $('#taskInput').val('');
+      $('#dateInput').val('');
+      $('#priorityInput').val('Tinggi');
+      
+      editMode = false;
+      editDocId = null;
+    }
   
 </body>
 
