@@ -21,3 +21,39 @@ const firebaseConfig = {
   messagingSenderId: "1049128187878",
   appId: "1:1049128187878:web:e1879710f4b5252a68c827",
 };
+// Inisialisasi Firebase
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+export async function ambildaftartodolist() {
+  const refDokumen = collection(db, "todolist");
+  const kueri = query(refDokumen, orderBy("nama"));
+  const cuplikanKueri = await getDocs(kueri);
+
+  let hasil = [];
+  cuplikanKueri.forEach((dok) => {
+    hasil.push({
+      id: dok.id,
+      nama: dok.data().nama,
+      prioritas: dok.data().prioritas,
+      status: dok.data().status,
+      tanggal: dok.data().tanggal,
+    });
+  });
+
+  return hasil;
+}
+export async function tambahtodolist(nama, prioritas, tanggal) {
+  try {
+    const dokRef = await addDoc(collection(db, 'todolist'), {
+      nama: nama,
+      prioritas: prioritas,
+      tanggal: tanggal,
+      status: 'Belum Dikerjakan'
+    });
+    console.log('Berhasil menambah todolist' + dokRef.id);
+  } catch (e) {
+    console.log('Gagal menambah todolist ' + e);
+  }
+}
