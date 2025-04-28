@@ -249,7 +249,31 @@ const tanggal = tanggalText.split('/').reverse().join('-');
     }
   });
 }
+   
+       window.deleteTask = async function(button, docId) {
+      if (confirm('Apakah Anda yakin ingin menghapus tugas ini?')) {
+        try {
+          await hapustodolist(docId);
+          tampilkanTodolist(); // Memperbarui tampilan setelah menghapus tugas
+        } catch (error) {
+          console.error('Gagal menghapus tugas:', error);
+        }
+      }
+    };
     
+    window.onload = tampilkanTodolist;
+    
+    $('#tambah').on('click', function(e) {
+      e.preventDefault();
+      addTask();
+    });
+    
+    window.editTask = editTask;
+    window.addTask = addTask;
+    window.updateStatus = updateStatus;
+    window.resetForm = resetForm;
+    window.tampilkanTodolist = tampilkanTodolist;
+  </script> 
  
 </body>
 
