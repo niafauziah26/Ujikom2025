@@ -62,6 +62,39 @@
 </head>
 
 <body>
+    <!-- Form untuk mengubah data -->
+  <form>
+    <div class="mb-3">
+      <label class="form-label">Tugas</label>
+      <input type="text" class="form-control" id="input-tugas">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Status</label>
+      <select class="form-control" id="input-status">
+        <option value="Belum Dikerjakan">Belum Dikerjakan</option>
+        <option value="Sudah Dikerjakan">Sudah Dikerjakan</option>
+        <option value="Selesai">Selesai</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Prioritas</label>
+      <select class="form-control" id="input-prioritas">
+        <option value="Tinggi">Tinggi⭐</option>
+        <option value="Sedang">Sedang💫</option>
+        <option value="Rendah">Rendah✨</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Tanggal</label>
+      <input type="date" class="form-control" id="input-tanggal">
+    </div>
+    <button type="submit" class="btn btn-primary" id="tombol-ubah">Ubah</button>
+  </form>
+  
+  <script type="module">
+    import { ambiltodolist, ubahtodolist } from './main.js';
+    
+  
   
 </body>
 
